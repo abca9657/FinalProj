@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <cstdlib>
-//#include <string>
 #include <fstream>
 #include <stdlib.h>
 #include "hangman.h"
@@ -140,4 +139,11 @@ void Hangman::readFileIn(std::string filename){
     for(int i=0;i<wordCount; i++){  //puts items into hashtable
     h.addItem(words[i], scoreArray[i]);
     }
+}
+
+
+int Hangman::randIndex()
+{
+    int index = rand() % 10;
+    return index;
 }
