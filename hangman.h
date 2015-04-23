@@ -3,7 +3,10 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <string>
+//#include <string>
+#include <fstream>
+#include <stdlib.h>
+
 
 
 using namespace std;
@@ -14,18 +17,17 @@ using namespace std;
 //these are the nodes to store the words and points
 struct item
 {
-    string word;
+    std::string word;
     int score;
-    bool checkIfGuessed;
+    //item* next;
     item* next;
 
     item(){};
 
-    item(string in_word, int in_score, bool in_checkIfGuessed)
+    item(std::string in_word, int in_score)
     {
         word = in_word;
         score = in_score;
-        checkIfGuessed = in_checkIfGuessed;
     }
 };
 
@@ -35,9 +37,9 @@ class Hangman
 public:
     Hangman();
 	void drawHangman(int count);
-	int Hash(string key);           //This returns a hash number for a word
-	void addItem(string word, int score);      //This adds a word and score to a node and puts it in the hashtable
-
+	int Hash(std::string key);           //This returns a hash number for a word
+	void addItem(std::string word, int score);      //This adds a word and score to a node and puts it in the hashtable
+    void readFileIn(std::string filename);
 private:
     static const int tableSize = 10;
     item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
