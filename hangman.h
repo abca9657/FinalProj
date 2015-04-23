@@ -16,14 +16,16 @@ struct item
 {
     string word;
     int score;
+    bool checkIfGuessed;
     item* next;
 
     item(){};
 
-    item(string in_word, int in_score)
+    item(string in_word, int in_score, bool in_checkIfGuessed)
     {
         word = in_word;
         score = in_score;
+        checkIfGuessed = in_checkIfGuessed;
     }
 };
 
