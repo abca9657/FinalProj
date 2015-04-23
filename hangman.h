@@ -16,7 +16,6 @@ struct item
 {
     string word;
     int score;
-    //item* next;
     item* next;
 
     item(){};
