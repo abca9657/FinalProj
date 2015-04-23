@@ -16,8 +16,9 @@ public:
 	void drawHangman(int count);
 
 private:
-	
-{
+    int test;
+
+};
 
 
 #endif
