@@ -1,8 +1,8 @@
-ant
-barefoot
-library
-piano
-soup
+ant,50
+barefoot,80
+library,100
+piano,70
+soup,60
 
 
 
