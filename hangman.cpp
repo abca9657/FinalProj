@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <string>
+//#include <string>
+#include <fstream>
+#include <stdlib.h>
 #include "hangman.h"
 
 
@@ -15,14 +17,13 @@ Hangman::Hangman()
         HashTable[i] = new item;
         HashTable[i]->word = "empty";
         HashTable[i]->score = 0;
-        HashTable[i]->checkIfGuessed = false;
         HashTable[i]->next = NULL;
     }
 }
 
 
 //This function changes a word (key) to a number for the hash table
-int Hangman::Hash(string key)
+int Hangman::Hash(std::string key)
 {
     //key is a word like "Paul" to add to the table
     int hsh = 0;
@@ -44,7 +45,7 @@ int Hangman::Hash(string key)
 
 
 //This function adds a given word and score to the hash table
-void Hangman::addItem(string word, int score)
+void Hangman::addItem(std::string word, int score)
 {
     //stores index of name
     int index = Hash(word);
@@ -75,13 +76,13 @@ void Hangman::addItem(string word, int score)
 void Hangman::drawHangman(int count)
 {
 	//Declarations
-	string one;
-	string two;
-	string three;
-	string four;
-	string five;
-	string six;
-	string seven;
+	std::string one;
+	std::string two;
+	std::string three;
+	std::string four;
+	std::string five;
+	std::string six;
+	std::string seven;
 
 
 	one = " ----------|\n |         |\n |         |\n           |\n           |\n           |\n           |\n           |\n       --------- \n";
@@ -112,3 +113,31 @@ void Hangman::drawHangman(int count)
 		count = 7;
 }
 
+
+
+void Hangman::readFileIn(std::string filename){
+    std::string line;
+    std::string words[350];
+    std::string stringScore[350];
+    int wordCount=0;
+    ifstream myfile;
+    myfile.open(filename.c_str());   //opens the file
+    if (myfile.is_open())   //goes through this code since file is open
+    {
+        while(getline(myfile, line)) {    //get each line in the file and puts them in array.
+            int index = line.find(",");
+            words[wordCount] = line.substr(0,index);
+            line = line.substr(index+1);
+            stringScore[wordCount]=line.substr();
+            wordCount++;
+        }
+    }
+    int scoreArray[350];
+    for(int i=0; i<wordCount; i++){ //changes strings to int
+      scoreArray[i] = atoi(stringScore[i].c_str());
+    }
+    Hangman h;
+    for(int i=0;i<wordCount; i++){  //puts items into hashtable
+    h.addItem(words[i], scoreArray[i]);
+    }
+}
