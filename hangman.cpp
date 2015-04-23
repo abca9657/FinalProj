@@ -15,6 +15,7 @@ Hangman::Hangman()
         HashTable[i] = new item;
         HashTable[i]->word = "empty";
         HashTable[i]->score = 0;
+        HashTable[i]->checkIfGuessed = false;
         HashTable[i]->next = NULL;
     }
 }
