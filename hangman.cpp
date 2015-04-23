@@ -8,10 +8,10 @@
 
 using namespace std;
 
-Hangman::Hangman()
+/*Hangman::Hangman()
 {
 
-}
+}*/
 
 //This will draw the hangman based on what guess they're on (ie, first, second, third, etc.)
 void Hangman::drawHangman(int count)
