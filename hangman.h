@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <cstdlib>
-//#include <string>
 #include <fstream>
 #include <stdlib.h>
 
@@ -35,15 +34,17 @@ struct item
 class Hangman
 {
 public:
-    Hangman();
+	Hangman();
 	void drawHangman(int count);
 	int Hash(std::string key);           //This returns a hash number for a word
 	void addItem(std::string word, int score);      //This adds a word and score to a node and puts it in the hashtable
-    void readFileIn(std::string filename);
+	void readFileIn(std::string filename);
+	int randIndex();
 private:
-    static const int tableSize = 10;
-    item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
-
+	static const int tableSize = 10;
+	item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
+	std::string words[350];
+	std::string stringScore[350];
 };
 
 
