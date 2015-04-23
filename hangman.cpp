@@ -116,8 +116,8 @@ void Hangman::drawHangman(int count)
 
 void Hangman::readFileIn(std::string filename){
     std::string line;
-    std::string words[350];
-    std::string stringScore[350];
+    //std::string words[350];
+    //std::string stringScore[350];
     int wordCount=0;
     ifstream myfile;
     myfile.open(filename.c_str());   //opens the file
