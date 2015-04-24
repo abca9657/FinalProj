@@ -40,7 +40,7 @@ public:
 	void addItem(std::string word, int score);      //This adds a word and score to a node and puts it in the hashtable
 	void readFileIn(std::string filename);
 	int randIndex();
-	void checkIfGuessed(string word, char guess);
+	void checkIfGuessed(string word, char guess, string trackGuess);
 	int Hangman::addScore(string word)
 private:
 	static const int tableSize = 10;
