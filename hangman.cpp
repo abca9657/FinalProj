@@ -18,7 +18,8 @@ Hangman::Hangman()
         HashTable[i]->score = 0;
         HashTable[i]->next = NULL;
     }
-    int guessTracker=0;
+    guessTracker=0;
+    score=0;
 }
 
 
@@ -170,6 +171,15 @@ void Hangman::checkIfGuessed(string word, char guess){
     }
     if(wordGuessed==0){
     	cout<<"You got the word right!  The word was: "<<word<<endl;
-    	addScore();
+    	addScore(word);
     }
+}
+
+int Hangman::addScore(string word){
+for(int i=0; i<350; i++){
+    if(HashTable[i]->word == word){
+        score=score + HashTable[i]->score;
+    }
+}
+cout<<"Your score is now: "<<score<<endl;
 }
