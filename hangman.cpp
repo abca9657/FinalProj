@@ -18,6 +18,7 @@ Hangman::Hangman()
         HashTable[i]->score = 0;
         HashTable[i]->next = NULL;
     }
+    int guessTracker=0;
 }
 
 
@@ -146,4 +147,23 @@ int Hangman::randIndex()
 {
     int index = rand() % 10;
     return index;
+}
+
+bool Hangman::checkIfGuessed(string word, char guess){
+    int tracker=0;
+    for(int i=0; i<word.length(); i++){         //loop through word checking each letter
+        if(guess == word[i]){
+            cout<<guess;
+            tracker++;
+        }
+        else{
+            cout<<"_";
+        }
+    }
+    if(tracker==0){         //check if any letters were found
+            cout<<endl;
+        cout<<"Letter was not in the word"<<endl;
+        guessTracker++;
+        drawHangman(guessTracker);
+    }
 }
