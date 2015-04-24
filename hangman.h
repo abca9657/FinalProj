@@ -41,12 +41,14 @@ public:
 	void readFileIn(std::string filename);
 	int randIndex();
 	void checkIfGuessed(string word, char guess);
+	int Hangman::addScore(string word)
 private:
 	static const int tableSize = 10;
 	item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
 	std::string words[350];
 	std::string stringScore[350];
 	int guessTracker;
+	int score;
 };
 
 
