@@ -40,11 +40,13 @@ public:
 	void addItem(std::string word, int score);      //This adds a word and score to a node and puts it in the hashtable
 	void readFileIn(std::string filename);
 	int randIndex();
+	void checkIfGuessed(string word, char guess);
 private:
 	static const int tableSize = 10;
 	item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
 	std::string words[350];
 	std::string stringScore[350];
+	int guessTracker;
 };
 
 
