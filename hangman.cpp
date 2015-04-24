@@ -149,14 +149,16 @@ int Hangman::randIndex()
     return index;
 }
 
-bool Hangman::checkIfGuessed(string word, char guess){
+void Hangman::checkIfGuessed(string word, char guess){
     int tracker=0;
+    int wordGuessed=0;
     for(int i=0; i<word.length(); i++){         //loop through word checking each letter
         if(guess == word[i]){
             cout<<guess;
             tracker++;
         }
         else{
+        	wordGuessed++;	
             cout<<"_";
         }
     }
@@ -165,5 +167,9 @@ bool Hangman::checkIfGuessed(string word, char guess){
         cout<<"Letter was not in the word"<<endl;
         guessTracker++;
         drawHangman(guessTracker);
+    }
+    if(wordGuessed==0){
+    	cout<<"You got the word right!  The word was: "<<word<<endl;
+    	addScore();
     }
 }
