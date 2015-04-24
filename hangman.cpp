@@ -18,7 +18,7 @@ Hangman::Hangman()
         HashTable[i]->score = 0;
         HashTable[i]->next = NULL;
     }
-    guessTracker=0;
+    guessTracker=1;
     score=0;
 }
 
@@ -150,36 +150,44 @@ int Hangman::randIndex()
     return index;
 }
 
-void Hangman::checkIfGuessed(string word, char guess){
+string Hangman::checkIfGuessed(string word, char guess, string trackGuess){
     int tracker=0;
     int wordGuessed=0;
-    for(int i=0; i<word.length(); i++){         //loop through word checking each letter
+    for(int i=0; i<word.length(); i++){   //loop through word checking each letter
         if(guess == word[i]){
-            cout<<guess;
+            trackGuess[i]=guess;
             tracker++;
         }
+        else if(guess != '_'){
+            trackGuess[i]=trackGuess[i];
+        }
         else{
-        	wordGuessed++;	
-            cout<<"_";
+            trackGuess[i]= '_';
+
         }
     }
     if(tracker==0){         //check if any letters were found
-            cout<<endl;
+        cout<<endl;
         cout<<"Letter was not in the word"<<endl;
         guessTracker++;
         drawHangman(guessTracker);
     }
+    else if(tracker > 0){         //check if any letters were found
+        drawHangman(guessTracker);
+    }
     if(wordGuessed==0){
     	cout<<"You got the word right!  The word was: "<<word<<endl;
-    	addScore(word);
+        addScore(word);		//segmentation fault for some reason
     }
+    return trackGuess;
 }
 
-int Hangman::addScore(string word){
+void Hangman::addScore(string word){
 for(int i=0; i<350; i++){
-    if(HashTable[i]->word == word){
+    if(HashTable[i]->word== word){
         score=score + HashTable[i]->score;
     }
 }
 cout<<"Your score is now: "<<score<<endl;
 }
+
