@@ -53,14 +53,14 @@ int main()
                 maskedWord.append(tmpStr);
             }
             cout << maskedWord << endl;
-
+            string trackGuess=maskedWord;
             int playTheGame = 0;
             while(playTheGame != 1)
             {
                 cout<<"Type a guess"<<endl;
                 cin>>guess;
 
-                string trackGuess = obj.checkIfGuessed(wordToGuess, guess,maskedWord);
+                trackGuess = obj.checkIfGuessed(wordToGuess, guess,trackGuess);
                 cout<<trackGuess<<endl;
 
 
