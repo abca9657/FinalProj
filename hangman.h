@@ -18,15 +18,16 @@ struct item
 {
     std::string word;
     int score;
-    //item* next;
+    bool usedWord;
     item* next;
 
     item(){};
 
-    item(std::string in_word, int in_score)
+    item(std::string in_word, int in_score, bool in_usedWord)
     {
         word = in_word;
         score = in_score;
+        usedWord = in_usedWord;
     }
 };
 
@@ -40,15 +41,21 @@ public:
 	void addItem(std::string word, int score);      //This adds a word and score to a node and puts it in the hashtable
 	void readFileIn(std::string filename);
 	int randIndex();
-	void checkIfGuessed(string word, char guess, string trackGuess);
-	int Hangman::addScore(string word)
+	string checkIfGuessed(std::string word, char guess, std::string trackGuess);
+	void addScore(std::string word);
+	int prompt_YN(std::string reply);
+	std::string getWord(int index);
 private:
 	static const int tableSize = 10;
 	item* HashTable[tableSize];     //This is the hashtable with all of our nodes in it
 	std::string words[350];
 	std::string stringScore[350];
 	int guessTracker;
-	int score;
+	int score = 0;
+	int fullIndex[tableSize];
+	int trkFullIndex = 0;
+	int checkRandNum(int numToCheck);
+
 };
 
 
