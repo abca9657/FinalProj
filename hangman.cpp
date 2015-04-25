@@ -16,10 +16,15 @@ Hangman::Hangman()
         HashTable[i] = new item;
         HashTable[i]->word = "empty";
         HashTable[i]->score = 0;
+        HashTable[i]->usedWord = false;
         HashTable[i]->next = NULL;
     }
     guessTracker=1;
     score=0;
+    for(int j=0; j<tableSize; j++)
+    {
+        fullIndex[j] = tableSize+5;
+    }
 }
 
 
@@ -137,12 +142,85 @@ void Hangman::readFileIn(std::string filename){
     for(int i=0; i<wordCount; i++){ //changes strings to int
       scoreArray[i] = atoi(stringScore[i].c_str());
     }
-    Hangman h;
+    //Hangman h;
     for(int i=0;i<wordCount; i++){  //puts items into hashtable
-    h.addItem(words[i], scoreArray[i]);
+        //cout<<words[i]<<", "<<scoreArray[i]<<endl;;
+        addItem(words[i], scoreArray[i]);
     }
+
+    //Test the table:
+    /*for(int j=0; j<tableSize; j++)
+    {
+        cout<<"index: "<<j<<" info: "<<HashTable[j]->word<<endl;;
+    }*/
 }
 
+
+int Hangman::checkRandNum(int numToCheck)
+{
+    int tst = 0;
+    int x=0;
+    while(fullIndex[x] != numToCheck)
+    {
+        if(x == tableSize-1)
+        {
+            tst = 1;   //No found number
+            break;
+        }
+        x++;
+    }
+
+    if(fullIndex[x] == numToCheck && tst != 1)   //This index is full, try a new one
+    {
+        tst = 2;
+    }
+    return tst;
+}
+
+std::string Hangman::getWord(int index)
+{
+    std::string useMe = "empty";
+    //int index = randIndex();
+    item* nxt = HashTable[index];
+    int tst = checkRandNum(index);
+
+    if(tst == 0)
+    {
+        cout<<"error, fix the checkRandNum function"<<endl;
+    }
+    else if(tst == 2)
+    {
+        cout<<"There are no more words to guess from. Your score is "<<score<<endl;
+        cout<<"Lies. Here's the index and info: "<<index<<":"<<HashTable[index]->word<<endl;
+    }
+    else //rand number good to use:
+    {
+        while(nxt != NULL)
+        {
+            if(!nxt->usedWord)  //false, use the word
+            {
+                nxt->usedWord = true;
+                useMe = nxt->word;
+                break;
+            }
+            else //try the next entry in that bucket
+            {
+                nxt = nxt->next;
+            }
+        }
+
+        if(useMe == "empty")   //move on to next index
+        {
+            fullIndex[trkFullIndex] = index;
+            trkFullIndex++;
+            index = 0;
+            useMe = getWord(index);
+        }
+    }
+
+
+    return useMe;
+}
 
 int Hangman::randIndex()
 {
@@ -150,15 +228,14 @@ int Hangman::randIndex()
     return index;
 }
 
-string Hangman::checkIfGuessed(string word, char guess, string trackGuess){
+string Hangman::checkIfGuessed(std::string word, char guess, std::string trackGuess){
     int tracker=0;
-    int wordGuessed=0;
     for(int i=0; i<word.length(); i++){   //loop through word checking each letter
         if(guess == word[i]){
             trackGuess[i]=guess;
             tracker++;
         }
-        else if(guess != '_'){
+        if(guess != '_'){
             trackGuess[i]=trackGuess[i];
         }
         else{
@@ -172,22 +249,62 @@ string Hangman::checkIfGuessed(string word, char guess, string trackGuess){
         guessTracker++;
         drawHangman(guessTracker);
     }
-    else if(tracker > 0){         //check if any letters were found
+    else /*if(tracker > 0)*/{         //check if any letters were found
         drawHangman(guessTracker);
     }
-    if(wordGuessed==0){
+    if(trackGuess == word){
     	cout<<"You got the word right!  The word was: "<<word<<endl;
-        addScore(word);		//segmentation fault for some reason
+        addScore(word);
     }
     return trackGuess;
 }
 
-void Hangman::addScore(string word){
-for(int i=0; i<350; i++){
-    if(HashTable[i]->word== word){
-        score=score + HashTable[i]->score;
+void Hangman::addScore(std::string word){
+    int chk = Hash(word);
+
+    item* nxt = HashTable[chk]->next;
+    if(HashTable[chk]->word == "empty")
+    {
+        //cout<<"chk val: "<<chk<<"\n Further info: "<<HashTable[chk]->word<<endl;
+        cout<<"error, no word found"<<endl;
     }
-}
-cout<<"Your score is now: "<<score<<endl;
+    else
+    {
+        while(nxt != NULL)
+        {
+            if(nxt->word == word)
+            {
+                score = score + nxt->score;
+                break;
+            }
+            nxt = nxt->next;
+        }
+    }
+    cout<<"Your score is now: "<<score<<endl;
 }
 
+
+int Hangman::prompt_YN(std::string reply)
+{
+    guessTracker = 1;
+	int answer = 0;
+	std::string word = reply;
+
+
+	for(int i = 0; i < reply.length(); i++)
+		word[i] = toupper(reply[i]);
+
+
+	if(word == "YES" || word == "SURE" || word == "OK" || word == "Y")
+		//PLAY
+		answer = 1;
+	else if(word == "NO" || word == "QUIT" || word == "STOP" || word == "TERMINATE" || word == "N")
+		//STOP
+		answer = 0;
+	else
+		//ERROR
+		answer = -1;
+
+
+	return(answer);
+}
