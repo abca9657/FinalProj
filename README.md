@@ -20,4 +20,4 @@ Contributors:
 N/A
 
 Open issues/bugs:
-N/A
+This program does not take into account the lettes that have already been guessed.
