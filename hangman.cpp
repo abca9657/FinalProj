@@ -248,6 +248,7 @@ Function description:
 This function checks if the guessed letter is in the word for hangman.  
 It also keeps track of what letters of the word have been guessed.
 It also returns a string to keep inputing the trackGuess string so that it keeps track of the letters guessed.
+Once the word is completely guessed then the addScore fucntion is called.
 
 Example:
 Hangman obj;
@@ -290,6 +291,20 @@ string Hangman::checkIfGuessed(std::string word, char guess, std::string trackGu
     }
     return trackGuess;
 }
+
+/*
+Function prototype:
+void Hangman::addScore(string);
+
+Function description:
+This function adds the score once the word has been guessed.  The score has already been read in and the score is being tracked as well.
+The Hash function is called so we can get the index of the word.
+Example:
+Hangman obj;
+obj.addScore("add");
+
+Pre-conditions: string word is the word the user is trying to guess and is randomly picked.
+*/
 
 void Hangman::addScore(std::string word){
     int chk = Hash(word);
