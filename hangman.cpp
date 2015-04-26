@@ -119,7 +119,19 @@ void Hangman::drawHangman(int count)
 		count = 7;
 }
 
+/*
+Function prototype:
+void Hangman::readFileIn(string);
 
+Function description:
+This function reads in the words and score values into arrays and then calls the addItem fucntion to put them into hashtables.
+
+Example:
+Hangman obj;
+obj.readFileIn("words.txt");
+
+Pre-conditions: filename is a string with the filename already coded in.  The file is words.txt
+*/
 
 void Hangman::readFileIn(std::string filename){
     std::string line;
@@ -230,7 +242,7 @@ int Hangman::randIndex()
 
 /*
 Function prototype:
-string Hangman::checkIfGuessed(strin, char, string);
+string Hangman::checkIfGuessed(string, char, string);
 
 Function description:
 This function checks if the guessed letter is in the word for hangman.  
