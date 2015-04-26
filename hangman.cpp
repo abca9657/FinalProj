@@ -257,7 +257,7 @@ string Hangman::checkIfGuessed(std::string word, char guess, std::string trackGu
         addScore(word);
     }
     if(guessTracker==7){
-        cout<<"You got the word incorrect, please try again."<<endl;
+        cout<<"You got the word incorrect.  The word was: "<<word<<endl;
         trackGuess=word;
     }
     return trackGuess;
