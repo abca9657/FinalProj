@@ -61,9 +61,12 @@ int main()
                 cin>>guess;
 
                 trackGuess = obj.checkIfGuessed(wordToGuess, guess,trackGuess);
+                if(trackGuess==wordToGuess){
+                    playTheGame=1;
+                }
+                else{
                 cout<<trackGuess<<endl;
-
-
+                }
             }
 
         } //end PLAY else statement
