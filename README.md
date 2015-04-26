@@ -20,4 +20,4 @@ Contributors:
 N/A
 
 Open issues/bugs:
-This program does not take into account the lettes that have already been guessed.
+This program does not take into account the letters that have already been guessed.
