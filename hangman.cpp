@@ -228,6 +228,22 @@ int Hangman::randIndex()
     return index;
 }
 
+/*
+Function prototype:
+string Hangman::checkIfGuessed(strin, char, string);
+
+Function description:
+This function checks if the guessed letter is in the word for hangman.  
+It also keeps track of what letters of the word have been guessed.
+It also returns a string to keep inputing the trackGuess string so that it keeps track of the letters guessed.
+
+Example:
+Hangman obj;
+string trackGuess = obj.checkIfGuessed("banana", 'a', "______")
+
+Pre-conditions: word is a random word from the words.txt file.  guess is a char and takes user input. trackGuess is a string of underscores or a string of underscores and letters.
+Post-conditions: returns a string
+*/
 string Hangman::checkIfGuessed(std::string word, char guess, std::string trackGuess){
     int tracker=0;
     for(int i=0; i<word.length(); i++){   //loop through word checking each letter
