@@ -20,4 +20,4 @@ Contributors:
 N/A
 
 Open issues/bugs:
-This program does not take into account the letters that have already been guessed.
+This program does not take into account the letters that have already been guessed, but it does not harm you if you guess them again.  This program also does not take into account if a word has already been used for guessing.
