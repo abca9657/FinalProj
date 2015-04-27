@@ -13,7 +13,7 @@ System Requirements:
 Linux
 
 Group Members:
-Abby Caballero
+Abbigail Caballero
 Alejandro Alvarez
 
 Contributors:
