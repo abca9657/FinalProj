@@ -330,15 +330,29 @@ void Hangman::addScore(std::string word){
     cout<<"Your score is now: "<<score<<endl;
 }
 
+/*
+Function prototype:
+int Hangman::prompt_YN(string);
+
+Function description:
+This function finds out what the user input was for whether the user wants to play or not and it returns an integer.
+
+Example:
+Hangman obj;
+int answer = obj.prompt_YN("Yes");
+
+Pre-conditions: string reply is the user input of whethe the user wants to play the game
+Post-conditions: returns integer that is 0, 1, or -1
+*/
 
 int Hangman::prompt_YN(std::string reply)
 {
-    guessTracker = 1;
+    guessTracker = 1;		//reinitializes guessTracker
 	int answer = 0;
 	std::string word = reply;
 
 
-	for(int i = 0; i < reply.length(); i++)
+	for(int i = 0; i < reply.length(); i++)		//checks the reply to see if user wants to play
 		word[i] = toupper(reply[i]);
 
 
@@ -353,5 +367,5 @@ int Hangman::prompt_YN(std::string reply)
 		answer = -1;
 
 
-	return(answer);
+	return(answer);		//returns int to see what the user said
 }
