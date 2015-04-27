@@ -323,7 +323,7 @@ Pre-conditions: string word is the word the user is trying to guess and is rando
 void Hangman::addScore(std::string word){
     int chk = Hash(word);
 
-    item* nxt = HashTable[chk]->next;
+    item* nxt = HashTable[chk];
     if(HashTable[chk]->word == "empty")
     {
         //cout<<"chk val: "<<chk<<"\n Further info: "<<HashTable[chk]->word<<endl;
