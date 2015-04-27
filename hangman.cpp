@@ -234,9 +234,23 @@ std::string Hangman::getWord(int index)
     return useMe;
 }
 
+/*
+Function prototype:
+int Hangman::randIndex();
+
+Function description:
+This function gets a random index from the hashtable that we have made so we can get a random word.
+
+Example:
+Hangman obj;
+int index= obj.randIndex();
+
+Post-conditions: returns a positive integer
+*/
+
 int Hangman::randIndex()
 {
-    int index = rand() % 10;
+    int index = rand() % 10;	//obtains random index
     return index;
 }
 
