@@ -17,7 +17,7 @@ Abbigail Caballero
 Alejandro Alvarez
 
 Contributors:
-N/A
+lamc8684
 
 Open issues/bugs:
 This program does not take into account the letters that have already been guessed, but it does not harm you if you guess them again. It also does not penalize you if you get the word wrong. 

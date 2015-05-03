@@ -5,6 +5,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include "hangman.h"
+#include <vector>
 
 
 using namespace std;
@@ -21,6 +22,7 @@ Hangman::Hangman()
     }
     guessTracker=1;
     score=0;
+    wrongGuesses.clear();
     for(int j=0; j<tableSize; j++)
     {
         fullIndex[j] = tableSize+5;
@@ -117,6 +119,11 @@ void Hangman::drawHangman(int count)
 		cout << seven;
 	else
 		count = 7;
+
+	//prints out incorrect guesses stored in vector -lamc8684
+    cout<<endl<<"Incorrect Guesses:"<<endl;
+    for(int i=0; i<wrongGuesses.size(); i++)
+        cout<<wrongGuesses[i]<<" "<<endl;
 }
 
 /*
@@ -259,7 +266,7 @@ Function prototype:
 string Hangman::checkIfGuessed(string, char, string);
 
 Function description:
-This function checks if the guessed letter is in the word for hangman.  
+This function checks if the guessed letter is in the word for hangman.
 It also keeps track of what letters of the word have been guessed.
 It also returns a string to keep inputing the trackGuess string so that it keeps track of the letters guessed.
 Once the word is completely guessed then the addScore fucntion is called.
@@ -290,6 +297,7 @@ string Hangman::checkIfGuessed(std::string word, char guess, std::string trackGu
         cout<<endl;
         cout<<"Letter was not in the word"<<endl;
         guessTracker++;
+        wrongGuesses.push_back(guess);
         drawHangman(guessTracker);
     }
     else /*if(tracker > 0)*/{         //check if any letters were found
