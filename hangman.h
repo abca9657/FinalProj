@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <stdlib.h>
-
+#include <vector>
 
 
 using namespace std;
@@ -55,6 +55,7 @@ private:
 	int fullIndex[tableSize];
 	int trkFullIndex = 0;
 	int checkRandNum(int numToCheck);
+	vector<char>wrongGuesses;
 
 };
 
